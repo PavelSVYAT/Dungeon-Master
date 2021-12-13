@@ -1,0 +1,197 @@
+import random
+konec_igri = 1
+col_vo_HP = 10
+damadge = 1
+level = 1
+hod_igroka = 1
+sledushaya_komnata = 1
+sunduk = 1
+zelya = 0
+ishod_ataki = 1
+HP_mimika = 3
+damadge_mimika = 1
+hod_v_boyu = 1
+pobeg = 1
+opujie = 1
+HP_zombi = 3
+HP_sliznya = 2
+vrag_1_flor = 1
+HP_skeleta = 4
+print("Приветствую вас в игре Dungeon Master!")
+while konec_igri != 0:
+    print("Количество HP =", col_vo_HP, "   Урон =", damadge, "   зелья =", zelya)
+    print("Сделайте ход.")
+    print("1-в следующую комнату, 0-завершить игру")
+    hod_igroka = int(input())
+    if hod_igroka == 1:
+        sledushaya_komnata = random.randint(1, 3)
+        if sledushaya_komnata == 1:
+            print("Пустая комната")
+        elif sledushaya_komnata == 2:
+            print("сундук")
+            sunduk = random.randint(1, 3)
+            if sunduk == 1:
+                print("Это зелье лечения")
+                zelya = zelya+1
+                print("Теперь зелий", zelya)
+            if sunduk == 2:
+                HP_mimika = 3
+                print("Это мимик!")
+                while HP_mimika != 0 and col_vo_HP != 0:
+                    print("Сделайте ход.")
+                    print("8-попытка атаки, 9-попытка побега, 7-выпить зелье")
+                    print("Количество HP =", col_vo_HP, "   Урон =", damadge, "   зелья =", zelya)
+                    print("Количество HP мимика =", HP_mimika)
+                    hod_v_boyu = int(input())
+                    if hod_v_boyu == 8:
+                        ishod_ataki_igroka = random.randint(1, 10)
+                        if ishod_ataki_igroka == 1 or ishod_ataki_igroka == 5 or ishod_ataki_igroka == 6 or ishod_ataki_igroka == 7 or ishod_ataki_igroka == 8 or ishod_ataki_igroka == 9:
+                            print("Ты попал!")
+                            HP_mimika = HP_mimika-damadge
+                            print("HP мимика =", HP_mimika)
+                        if ishod_ataki_igroka == 10 or ishod_ataki_igroka == 2 or ishod_ataki_igroka == 3 or ishod_ataki_igroka == 4:
+                            print("Промах, мимик атакует!")
+                            col_vo_HP = col_vo_HP-1
+                            print("У тебя", col_vo_HP, "HP")
+                    if hod_v_boyu == 9:
+                        pobeg = random.randint(1, 2)
+                        if pobeg == 1:
+                            print("Ты убежал!")
+                        if pobeg == 2:
+                            print("Ты не смог убежать!")
+                    if hod_v_boyu == 7 and zelya != 0:
+                        print("Ты выпил зелье.")
+                        col_vo_HP = col_vo_HP+2
+                        zelya = zelya - 1
+                        print("У тебя", col_vo_HP, "HP")
+                if HP_mimika <= 0:
+                    print("Ты убил его!")
+                    zelya = zelya + 1
+                    print("+1 зелье")
+                if col_vo_HP == 0:
+                    print("Он убил тебя!")
+                    konec_igri = 0
+            if sunduk == 3:
+                print("здесь оружие!")
+                orujie = random.randint(1, 2)
+                damadge = damadge+orujie
+                print("Твой урон теперь равен", damadge)
+        elif sledushaya_komnata == 3:
+            print("Здесь враг!")
+            vrag_1_flor = random.randint(1, 3)
+            if vrag_1_flor == 1:
+                print("Это зомби!")
+                HP_zombi = 3
+                while HP_zombi != 0 and col_vo_HP != 0:
+                    print("Сделайте ход.")
+                    print("8-попытка атаки, 9-попытка побега, 7-выпить зелье")
+                    print("Количество HP =", col_vo_HP, "   Урон =", damadge, "   зелья =", zelya)
+                    print("Количество HP зомби =", HP_zombi)
+                    hod_v_boyu = int(input())
+                    if hod_v_boyu == 8:
+                        ishod_ataki_igroka = random.randint(1, 10)
+                        if ishod_ataki_igroka == 1 or ishod_ataki_igroka == 5 or ishod_ataki_igroka == 6 or ishod_ataki_igroka == 7 or ishod_ataki_igroka == 8 or ishod_ataki_igroka == 9:
+                            print("Ты попал!")
+                            HP_zombi = HP_zombi - damadge
+                            print("HP зомби =", HP_zombi)
+                        if ishod_ataki_igroka == 10 or ishod_ataki_igroka == 2 or ishod_ataki_igroka == 3 or ishod_ataki_igroka == 4:
+                            print("Промах, зомби атакует!")
+                            col_vo_HP = col_vo_HP - 1
+                            print("У тебя", col_vo_HP, "HP")
+                    if hod_v_boyu == 9:
+                        pobeg = random.randint(1, 2)
+                        if pobeg == 1:
+                            print("Ты убежал!")
+                        if pobeg == 2:
+                            print("Ты не смог убежать!")
+                    if hod_v_boyu == 7 and zelya != 0:
+                        print("Ты выпил зелье.")
+                        col_vo_HP = col_vo_HP + 2
+                        zelya = zelya-1
+                        print("У тебя", col_vo_HP, "HP")
+                if HP_zombi <= 0:
+                    print("Ты убил его!")
+                    zelya = zelya + 1
+                    print("+1 зелье")
+                if col_vo_HP == 0:
+                    print("Он убил тебя!")
+                    konec_igri = 0
+            if vrag_1_flor == 2:
+                print("Это скелет!")
+                HP_skeleta = 4
+                while HP_skeleta != 0 and col_vo_HP != 0:
+                    print("Сделайте ход.")
+                    print("8-попытка атаки, 9-попытка побега, 7-выпить зелье")
+                    print("Количество HP =", col_vo_HP, "   Урон =", damadge, "   зелья =", zelya)
+                    print("Количество HP скелета =", HP_skeleta)
+                    hod_v_boyu = int(input())
+                    if hod_v_boyu == 8:
+                        ishod_ataki_igroka = random.randint(1, 10)
+                        if ishod_ataki_igroka == 1 or ishod_ataki_igroka == 5 or ishod_ataki_igroka == 6 or ishod_ataki_igroka == 7 or ishod_ataki_igroka == 8 or ishod_ataki_igroka == 9:
+                            print("Ты попал!")
+                            HP_skeleta = HP_skeleta - damadge
+                            print("HP скелета =", HP_skeleta)
+                        if ishod_ataki_igroka == 10 or ishod_ataki_igroka == 2 or ishod_ataki_igroka == 3 or ishod_ataki_igroka == 4:
+                            print("Промах, скелет атакует!")
+                            col_vo_HP = col_vo_HP - 1
+                            print("У тебя", col_vo_HP, "HP")
+                    if hod_v_boyu == 9:
+                        pobeg = random.randint(1, 2)
+                        if pobeg == 1:
+                            print("Ты убежал!")
+                        if pobeg == 2:
+                            print("Ты не смог убежать!")
+                    if hod_v_boyu == 7 and zelya != 0:
+                        print("Ты выпил зелье.")
+                        col_vo_HP = col_vo_HP + 2
+                        zelya = zelya - 1
+                        print("У тебя", col_vo_HP, "HP")
+                if HP_skeleta <= 0:
+                    print("Ты убил его!")
+                    zelya = zelya + 2
+                    print("+2 зелье")
+                if col_vo_HP == 0:
+                    print("Он убил тебя!")
+                    konec_igri = 0
+            if vrag_1_flor == 3:
+                print("Это слизень!")
+                HP_sliznya = 2
+                while HP_sliznya != 0 and col_vo_HP != 0:
+                    print("Сделайте ход.")
+                    print("8-попытка атаки, 9-попытка побега, 7-выпить зелье")
+                    print("Количество HP =", col_vo_HP, "   Урон =", damadge, "   зелья =", zelya)
+                    print("Количество HP слизня =", HP_sliznya)
+                    hod_v_boyu = int(input())
+                    if hod_v_boyu == 8:
+                        ishod_ataki_igroka = random.randint(1, 10)
+                        if ishod_ataki_igroka == 1  or ishod_ataki_igroka == 5 or ishod_ataki_igroka == 6 or ishod_ataki_igroka == 7 or ishod_ataki_igroka == 8 or ishod_ataki_igroka == 9:
+                            print("Ты попал!")
+                            HP_sliznya = HP_sliznya - damadge
+                            print("HP слизня =", HP_sliznya)
+                        if ishod_ataki_igroka == 10 or ishod_ataki_igroka == 2 or ishod_ataki_igroka == 3 or ishod_ataki_igroka == 4:
+                            print("Промах, слизень атакует!")
+                            col_vo_HP = col_vo_HP - 1
+                            print("У тебя", col_vo_HP, "HP")
+                    if hod_v_boyu == 9:
+                        pobeg = random.randint(1, 2)
+                        if pobeg == 1:
+                            print("Ты убежал!")
+                        if pobeg == 2:
+                            print("Ты не смог убежать!")
+                    if hod_v_boyu == 7 and zelya != 0:
+                        print("Ты выпил зелье.")
+                        col_vo_HP = col_vo_HP + 2
+                        zelya = zelya - 1
+                        print("У тебя", col_vo_HP, "HP")
+                if HP_sliznya <= 0:
+                    print("Ты убил его!")
+                    zelya = zelya+1
+                    print("+1 зелье")
+                if col_vo_HP == 0:
+                    print("Он убил тебя!")
+                    konec_igri = 0
+    if hod_igroka == 0:
+        print("Ты закончил игру добровольно...")
+        konec_igri = 0
+print("итог игры:")
+print("   Урон к концу игры =", damadge, "   зелья к концу игры =", zelya)
